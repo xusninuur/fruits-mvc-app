@@ -1,14 +1,12 @@
 const mongoose = require("mongoose");
-const dns = require("node:dns/promises")
-dns.setServers(["1.1.1.1"])
 
-//make sure to use your notes ,the dns issue is in page 55 of the notes
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI);
-    console.log("DB connected ");
+
+    console.log("MongoDB Connected Successfully");
   } catch (error) {
-    console.error("DB error:", error.message);
+    console.log("MongoDB Connection Error:", error.message);
     process.exit(1);
   }
 };
