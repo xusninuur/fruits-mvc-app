@@ -12,31 +12,27 @@ dns.setServers(["1.1.1.1"]);
 // Middleware
 app.use(express.json());
 
-/* PUBLIC FOLDER */
+// Static files
 app.use(express.static("public"));
 
-/* ROUTES */
+// Routes
 const productRoutes = require("./routes/productRoutes");
 app.use("/api", productRoutes);
 
-/* HOME ROUTE */
+// Home route
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
-/* DATABASE CONNECTION */
+// MongoDB connection
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("MongoDB Connected"))
   .catch((err) => console.log("MongoDB Error:", err.message));
 
-/* PORT */
-  const PORT = process.env.PORT || 3000;
-
+// Port
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port : ${PORT}`);
+  console.log(`Server is running on port: ${PORT}`);
 });
-
-
-
